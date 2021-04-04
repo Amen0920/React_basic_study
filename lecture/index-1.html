@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"> <!-- <div id="root"> <button>Like</button> </div> -->
+                    <!-- ReactDom.render 가 실행 되면서 버튼태그가만들어지게됨 -->
+    </div>
+
+    <script>
+        const e = React.createElement;  // HTML 태그생성
+
+        class LikeButton extends React.Component{
+            constructor(props){
+                super(props);
+
+            }
+
+            render(){
+                return e( 'button', 
+                { onClick : () => { console.log('clicked')},type:'submit' }, 'Like');//  
+                    //<button onclick="()=>{console.log('clicked')} " type="submit">Like</button> 으로 만들겠다'는 의미           
+            }
+        }
+    </script>
+    <script>
+        ReactDOM.render(e(LikeButton),document.querySelector('#root'));
+        //Root 태그안에 위에서 만든 LikeButton 컴포넌트를 렌더링하겠다는 의미 ( 그린다. )
+    </script>
+</body>
+</html>

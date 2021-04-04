@@ -10,27 +10,32 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="root"> <!-- <div id="root"> <button>Like</button> </div> -->
-                    <!-- ReactDom.render 가 실행 되면서 버튼태그가만들어지게됨 -->
+    <div id="root"> 
+                    
     </div>
 
     <script>
-        const e = React.createElement;  // HTML 태그생성
+        const e = React.createElement;  
 
         class LikeButton extends React.Component{
             constructor(props){
                 super(props);
+                this.state = {
+                    liked:'false'
+                }
             }
 
             render(){
-                return e( 'button', null, 'Like');// '<button>Like</button> 으로 만들겠다'는 의미 
-                                                  // 바로만드는게 아님
+                return e( 'button', 
+                { onClick : () => { this.setState({ liked : true})},type:'submit' }, 
+                this.state.liked === true ? 'Liked' : 'Like');//  
+                      
             }
         }
     </script>
     <script>
         ReactDOM.render(e(LikeButton),document.querySelector('#root'));
-        //Root 태그안에 위에서 만든 LikeButton 컴포넌트를 렌더링하겠다는 의미 ( 그린다. )
+       
     </script>
 </body>
 </html>
