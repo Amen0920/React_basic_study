@@ -6,8 +6,8 @@ module.exports = {
     devtool : 'eval',
     resolve:{
         extensions:['.js','.jsx'],
-        // fallback: { "url":false,  "util": false , "path" :false ,"os":false ,
-        // "http":false, "vm" :false, "https":false, "crypto":false, "constants":false ,"stream":false,"buffer":false, "assert": false},
+        fallback: { "url":false,  "util": false , "path" :false ,"os":false ,
+        "http":false, "vm" :false, "https":false, "crypto":false, "constants":false ,"stream":false,"buffer":false, "assert": false},
     },
 
     entry:{
