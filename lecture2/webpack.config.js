@@ -7,7 +7,8 @@ module.exports = {
     resolve:{
         extensions:['.js','.jsx'],
         fallback: { "url":false,  "util": false , "path" :false ,"os":false ,
-        "http":false, "vm" :false, "https":false, "crypto":false, "constants":false ,"stream":false,"buffer":false, "assert": false},
+        "http":false, "vm" :false, "https":false, "crypto":false, "constants":false ,"stream":false,"buffer":false, "assert": false
+        ,"querystring": false},
     },
 
     entry:{
@@ -18,11 +19,13 @@ module.exports = {
     module:{
         rules:[{
             test:/\.jsx?/,
+            exclude:/node_modules/,
             loader:'babel-loader',
             options:{
-                presets:['@babel/preset-env', '@babel/preset-react'],
+                presets:["@babel/preset-env","@babel/preset-react"],
                 plugins:[
-                    ["transform-class-properties", { "spec": true }],
+                    '@babel/plugin-proposal-class-properties'
+                    // ["transform-class-properties", { "spec": true }],
                 
                 
                 ],
