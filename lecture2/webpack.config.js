@@ -7,7 +7,7 @@ module.exports = {
     resolve:{
         extensions:['.js','.jsx'],
         fallback: { "url": require.resolve("url/"),  "util": false , "path" :false ,"os":false ,
-        "http":false, "vm" :false, "https":false, "crypto":false, "constants":false ,"stream":false,"buffer":false},
+        "http":false, "vm" :false, "https":false, "crypto":false, "constants":false ,"stream":false,"buffer":false, "assert": false},
     },
 
     entry:{
