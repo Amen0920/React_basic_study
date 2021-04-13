@@ -20,5 +20,11 @@
     "babel-loader": "^8.2.2",
     "webpack": "^5.31.2",
     "webpack-cli": "^4.6.0"
-  }
+  },
+  "browserslist":[
+    "> 1% in KR",
+    "not dead",
+    "ie 11"
+
+  ]
 }
