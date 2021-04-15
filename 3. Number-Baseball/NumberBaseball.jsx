@@ -31,9 +31,17 @@ class NumberBaseball extends React.Component{
                 </form>
                 <div>시도 : {this.state.tries.length} </div>
                 <ul>
-                    {['사과','바나나','포도','귤','감', '배','밤'].map( (v) => {
+                    {[
+                        ['사과','맛있다'],
+                        ['바나나','맛없다'],
+                        ['포도','시다'],
+                        ['귤','시다'],
+                        ['감','떫다'], 
+                        ['배','맛있다'],
+                        ['밤','맛없다']
+                    ].map( (v) => {
                         return(
-                            <li>{v}</li>
+                            <li><b>{v[0]}</b> - {v[1]}</li>
                         );
                     })}
                 </ul>
