@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack serve --env development"
   },
   "author": "Amen0920",
   "license": "MIT",
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",

@@ -11,7 +11,7 @@ module.exports = {
     },
     
     entry:{
-        app: ['./client.jsx']
+        app: ['./client']
     },
     
     module:{

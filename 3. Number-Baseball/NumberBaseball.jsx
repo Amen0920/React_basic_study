@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+const React = require('react');
 
-function getNumbers(){ // 숫자4개를 겹치지않고 랜덤으로 뽑는 함수
+
+function getNumber(){ // 숫자4개를 겹치지않고 랜덤으로 뽑는 함수
 
 }
 
-class NumberBaseball extends Component{
+class NumberBaseball extends React.Component{
     state = {
         result : '',
         value : '',
@@ -30,7 +31,11 @@ class NumberBaseball extends Component{
                 </form>
                 <div>시도 : {this.state.tries.length} </div>
                 <ul>
-                    <li/>
+                    {['사과','바나나','포도','귤','감', '배','밤'].map( (v) => {
+                        return(
+                            <li>{v}</li>
+                        );
+                    })}
                 </ul>
 
             </>
@@ -39,4 +44,4 @@ class NumberBaseball extends Component{
     }
 }
 
-export default NumberBaseball;
+module.exports = NumberBaseball;
