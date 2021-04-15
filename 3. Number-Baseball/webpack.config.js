@@ -4,7 +4,7 @@ const RefreshWebpack = require('@pmmmwh/react-refresh-webpack-plugin');
 module.exports = {
     name : 'NumberBaseball-setting',
     mode : 'development',
-    devtool : 'eval',
+    devtool : 'inline-source-map',
     resolve:{
         extensions:['.jsx','.js']
     },

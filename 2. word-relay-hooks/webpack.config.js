@@ -1,5 +1,5 @@
 const path = require('path');
-const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
     name:'word-relay-hooks',
@@ -21,14 +21,15 @@ module.exports = {
             options:{
                 presets:['@babel/preset-env','@babel/preset-react'],
                 plugins:['react-refresh/babel'],
-            }
+            },
+            exclude: path.join(__dirname, 'node_modules')
 
 
         }]
 
     },
     plugins:[
-        new RefreshWebpackPlugin()
+        new ReactRefreshWebpackPlugin(),
     ],
 
     output:{
