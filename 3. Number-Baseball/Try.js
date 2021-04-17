@@ -1,5 +1,4 @@
 const React = require('react');
-const { library } = require('webpack');
 
 
 class Try extends React.Component {
