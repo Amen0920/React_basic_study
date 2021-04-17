@@ -24,9 +24,11 @@ class NumberBaseball extends React.Component{
     onSubmitForm = (e) => {
         e.preventDefault();
         if(this.state.value === this.state.answer.join('')){ // 완전 동일할때 
-            this.setState({
-                result:'홈런',
-                tries:[...this.state.tries, {try: this.state.value, result : '홈런!'}]
+            this.setState((prevState)=>{
+                return{
+                    result:'홈런',
+                    tries:[...prevState.tries, {try: this.state.value, result : '홈런!'}]
+                }
             });
             alert('게임을 다시 시작합니다!');
             this.setState({
@@ -56,9 +58,12 @@ class NumberBaseball extends React.Component{
                         ball +=1;
                     }
                 }
-                this.setState({
-                    tries:[...this.state.tries,{try : this.state.value, result:`${strike} 스트라이크 ${ball} 볼입니다.`}],
-                    value:'',
+                this.setState((prevState) => {
+                    return{
+                        tries:[...prevState.tries,{try : this.state.value, result:`${strike} 스트라이크 ${ball} 볼입니다.`}],
+                        value:'',
+                    }
+                    
                     
                 })
             }
@@ -72,16 +77,17 @@ class NumberBaseball extends React.Component{
     };
 
     render(){
+        const {result,tries,value } = this.state;
         return(
             <>
-                <h1>{this.state.result}</h1>
+                <h1>{result}</h1>
                 <form onSubmit={this.onSubmitForm}>
-                    <input maxLength={4} value={this.state.value} onChange={this.onChangeInput}/>
+                    <input maxLength={4} value={value} onChange={this.onChangeInput}/>
                 
                 </form>
-                <div>시도 : {this.state.tries.length} </div>
+                <div>시도 : {tries.length} </div>
                 <ul>
-                    {this.state.tries.map((v,i) => {
+                    {tries.map((v,i) => {
                         return( 
                             <Try key={`${i + 1 }차 시도` } tryInfo = {v} />
                         );
