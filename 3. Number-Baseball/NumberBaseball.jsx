@@ -32,18 +32,30 @@ class NumberBaseball extends React.Component{
                 <div>시도 : {this.state.tries.length} </div>
                 <ul>
                     {[
-                        ['사과','맛있다'],
-                        ['바나나','맛없다'],
-                        ['포도','시다'],
-                        ['귤','시다'],
-                        ['감','떫다'], 
-                        ['배','맛있다'],
-                        ['밤','맛없다']
-                    ].map( (v) => {
+                        { fruit : '사과', taste: ' 맛있다'},
+                        { fruit : '포도', taste: ' 시다'},
+                        { fruit : '딸기', taste: ' 맛있다'},
+                        { fruit : '귤', taste: ' 시다'},
+                        { fruit : '감', taste: ' 떫다'},
+                        { fruit : '밤', taste: ' 맛없다'},
+                        // ['사과','맛있다'],
+                        // ['바나나','맛없다'],
+                        // ['포도','시다'],
+                        // ['귤','시다'],
+                        // ['감','떫다'], 
+                        // ['배','맛있다'],
+                        // ['밤','맛없다']
+                    ].map((v,i) => {
                         return(
-                            <li><b>{v[0]}</b> - {v[1]}</li>
+                            <li key={v.fruit + v.taste}><b>{v.fruit}</b> - {v.taste} , {i}</li>
                         );
                     })}
+                     
+                    
+                    {/* // .map( ( v ) => 
+                    // <li key={v.fruit + v.taste}><b>{v.fruit}</b> - {v.taste}</li>
+                    // )} */}
+                
                 </ul>
 
             </>
