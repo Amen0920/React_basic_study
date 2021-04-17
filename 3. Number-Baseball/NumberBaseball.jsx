@@ -1,4 +1,5 @@
 const React = require('react');
+const Try = require('./Try')
 
 
 function getNumber(){ // 숫자4개를 겹치지않고 랜덤으로 뽑는 함수
@@ -22,6 +23,16 @@ class NumberBaseball extends React.Component{
 
     };
 
+    fruits = [
+        { fruit : '사과', taste: ' 맛있다'},
+        { fruit : '포도', taste: ' 시다'},
+        { fruit : '딸기', taste: ' 맛있다'},
+        { fruit : '귤', taste: ' 시다'},
+        { fruit : '감', taste: ' 떫다'},
+        { fruit : '밤', taste: ' 맛없다'},
+
+    ]
+
     render(){
         return(
             <>
@@ -31,31 +42,11 @@ class NumberBaseball extends React.Component{
                 </form>
                 <div>시도 : {this.state.tries.length} </div>
                 <ul>
-                    {[
-                        { fruit : '사과', taste: ' 맛있다'},
-                        { fruit : '포도', taste: ' 시다'},
-                        { fruit : '딸기', taste: ' 맛있다'},
-                        { fruit : '귤', taste: ' 시다'},
-                        { fruit : '감', taste: ' 떫다'},
-                        { fruit : '밤', taste: ' 맛없다'},
-                        // ['사과','맛있다'],
-                        // ['바나나','맛없다'],
-                        // ['포도','시다'],
-                        // ['귤','시다'],
-                        // ['감','떫다'], 
-                        // ['배','맛있다'],
-                        // ['밤','맛없다']
-                    ].map((v,i) => {
-                        return(
-                            <li key={v.fruit + v.taste}><b>{v.fruit}</b> - {v.taste} , {i}</li>
+                    {this.fruits.map((v,i) => {
+                        return( 
+                            <Try value = {v} index={i} />
                         );
                     })}
-                     
-                    
-                    {/* // .map( ( v ) => 
-                    // <li key={v.fruit + v.taste}><b>{v.fruit}</b> - {v.taste}</li>
-                    // )} */}
-                
                 </ul>
 
             </>
