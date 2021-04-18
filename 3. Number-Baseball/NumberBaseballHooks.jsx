@@ -3,7 +3,7 @@ const React = require('react');
 const { memo } = React;
 const Try=  require('./TryHooks')
 
-function getNumber(){ // 숫자4개를 겹치지않고 랜덤으로 뽑는 함수
+const getNumber=() => { // 숫자4개를 겹치지않고 랜덤으로 뽑는 함수
     const candidate = [1,2,3,4,5,6,7,8,9];
     const array = [];
     for(let i = 0; i<4 ; i +=1){
