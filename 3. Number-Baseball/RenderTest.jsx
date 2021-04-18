@@ -13,6 +13,7 @@ class Test extends PureComponent {
 
     onClick = () => {
         this.setState((prevState)=>{
+            
             return{
                 array:[...prevState.array,1],
             }
