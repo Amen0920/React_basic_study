@@ -1,4 +1,5 @@
 const React = require('react');
+const { PureComponent } = React;
 const Try = require('./Try')
 
 
@@ -12,7 +13,7 @@ function getNumber(){ // 숫자4개를 겹치지않고 랜덤으로 뽑는 함�
     return array;
 }
 
-class NumberBaseball extends React.Component{
+class NumberBaseball extends PureComponent{
     state = {
         result : '',
         value : '',

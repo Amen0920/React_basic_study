@@ -1,8 +1,8 @@
 const React = require('react');
+const { PureComponent } = React;
 
 
-
-class Try extends React.Component {
+class Try extends PureComponent {
     render(){
         const { tryInfo } = this.props;
         return (
