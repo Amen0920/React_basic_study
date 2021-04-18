@@ -1,5 +1,5 @@
 const React = require('react');
-const { PureComponent } = React;
+const { Component , createRef} = React;
 const Try = require('./Try')
 
 
@@ -13,13 +13,12 @@ function getNumber(){ // 숫자4개를 겹치지않고 랜덤으로 뽑는 함�
     return array;
 }
 
-class NumberBaseball extends PureComponent{
+class NumberBaseball extends Component{
     state = {
         result : '',
         value : '',
         answer: getNumber(),
         tries:[] 
-    
     };
 
     onSubmitForm = (e) => {
@@ -37,6 +36,7 @@ class NumberBaseball extends PureComponent{
                 answer:getNumber(),
                 tries:[],
             }); 
+            this.oninputRef.current.focus();
         } else { // 답 틀렸을때 
             const answerArray = this.state.value.split('').map( (v)=> parseInt(v));
             let strike = 0;
@@ -77,13 +77,16 @@ class NumberBaseball extends PureComponent{
         this.setState({ value : e.target.value})
     };
 
+    oninputRef = createRef();
+    
+
     render(){
         const {result,tries,value } = this.state;
         return(
             <>
                 <h1>{result}</h1>
                 <form onSubmit={this.onSubmitForm}>
-                    <input maxLength={4} value={value} onChange={this.onChangeInput}/>
+                    <input ref={this.oninputRef} maxLength={4} value={value} onChange={this.onChangeInput}/>
                 
                 </form>
                 <div>시도 : {tries.length} </div>

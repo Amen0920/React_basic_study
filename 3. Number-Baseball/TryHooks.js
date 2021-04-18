@@ -1,15 +1,15 @@
+
 const React = require('react');
+const { memo } = React;
 
-
-
-const TryHooks = ({ tryInfo }) =>{
+const TryHooks = memo(({ tryInfo }) =>{
     return(
         <li>
             <div>{tryInfo.try}</div>
-            <div>{tryInfo.result}</div>
+            <div>{tryInfo.result}</div> 
         </li>
     )
-}
+})
 
 // const Try =(props) =>{
 //     return(

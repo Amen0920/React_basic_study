@@ -3,6 +3,11 @@ const { PureComponent } = React;
 
 
 class Try extends PureComponent {
+    state = {
+        result: this.props.result,
+        try: this.props.try,
+    };
+    
     render(){
         const { tryInfo } = this.props;
         return (

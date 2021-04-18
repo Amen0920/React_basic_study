@@ -1,5 +1,6 @@
-const { useState } = require('react');
+const { useState , useRef } = require('react');
 const React = require('react');
+const { memo } = React;
 const Try=  require('./TryHooks')
 
 function getNumber(){ // 숫자4개를 겹치지않고 랜덤으로 뽑는 함수
@@ -17,6 +18,7 @@ const NumberBaseballHooks = () => {
     const [value, setValue] = useState('');
     const [answer, setAnswer ] = useState(getNumber());
     const [tries, setTries] = useState([]);
+    const inputEl = useRef(null);
 
     const onSubmitForm = (e) => {
         e.preventDefault();
@@ -29,6 +31,7 @@ const NumberBaseballHooks = () => {
             setValue('');
             setAnswer(getNumber());
             setTries([]);
+            inputEl.current.focus();
         } else { // 답 틀렸을때 
             const answerArray = value.split('').map( (v)=> parseInt(v));
             let strike = 0;
@@ -59,16 +62,15 @@ const NumberBaseballHooks = () => {
     };
 
     const onChangeInput = (e) => {
-        console.log(answer);
         setValue(e.target.value);
     };
 
-  
     return(
+       
         <>
             <h1>{result}</h1>
             <form onSubmit={onSubmitForm}>
-                <input maxLength={4} value={value} onChange={onChangeInput}/>
+                <input ref= {inputEl} maxLength={4} value={value} onChange={onChangeInput}/>
                 
             </form>
             <div>시도 : {tries.length} </div>
