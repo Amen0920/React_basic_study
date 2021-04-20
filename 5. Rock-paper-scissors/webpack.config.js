@@ -17,8 +17,8 @@ module.exports = {
             test:[/\.jsx?/],
             loader:'babel-loader',
             options:{
-                preset:['@babel/preset-env','@babel/preset-react'],
-                plugins:['react-refresh']
+                presets:['@babel/preset-env','@babel/preset-react'],
+                plugins:['react-refresh/babel','@babel/plugin-proposal-class-properties']
             }
         }]
        
