@@ -45,8 +45,6 @@ class RSP extends Component {
     };
     changeHand = () =>{
         const { imgCoord } = this.state;
-        console.log('setInterval!! , '+imgCoord)
-        console.log(rspCoords.rock+','+rspCoords.scissor+','+rspCoords.paper)
         if(imgCoord === rspCoords.rock){
             this.setState({
                 imgCoord:rspCoords.scissor,
@@ -61,13 +59,13 @@ class RSP extends Component {
             });
         }
     }
-    onClickBtn = ()=>(choice) =>{
+    onClickBtn = (choice) => () =>{
         const { imgCoord } = this.state
         clearInterval(this.interval);
         const myScore = scores[choice];
         const cpuScore = scores[computerChoice(imgCoord)];
         const diff = myScore - cpuScore;
-    
+        console.log(diff);
         if(diff == 0 ){
             this.setState({
                 result:'비겼습니다.',
