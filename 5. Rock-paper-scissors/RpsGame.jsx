@@ -61,7 +61,7 @@ class RSP extends Component {
             });
         }
     }
-    onClickBtn = (choice) =>{
+    onClickBtn = ()=>(choice) =>{
         const { imgCoord } = this.state
         clearInterval(this.interval);
         const myScore = scores[choice];
@@ -101,9 +101,12 @@ class RSP extends Component {
             <>
                 <div id="computer" style={{background: `url(http://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0` }}></div>
                 <div>
-                    <button id="rock" className="btn" onClick={() => this.onClickBtn('rock')}>Rock</button>
-                    <button id="scissor" className="btn" onClick={() => this.onClickBtn('scissor')}>Scissor</button>
-                    <button id="paper" className="btn" onClick={() => this.onClickBtn('paper')}>Paper</button>
+                    <button id="rock" className="btn" onClick={this.onClickBtn('rock')}>Rock</button>
+                    {/* <button id="rock" className="btn" onClick={() => this.onClickBtn('rock')}>Rock</button> */}
+                    <button id="scissor" className="btn" onClick={this.onClickBtn('scissor')}>Scissor</button>
+                    {/* <button id="scissor" className="btn" onClick={() => this.onClickBtn('scissor')}>Scissor</button> */}
+                    <button id="paper" className="btn" onClick={this.onClickBtn('paper')}>Paper</button>
+                    {/* <button id="paper" className="btn" onClick={() => this.onClickBtn('paper')}>Paper</button> */}
                 </div>
                 <div>{result}</div>
                 <div>현재 {score}점</div>
