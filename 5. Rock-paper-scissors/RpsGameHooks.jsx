@@ -55,7 +55,7 @@ const Rsp = () =>{
         }else if([-1,2].includes(diff)){
             setResult('이겼습니다!');
             setScore((prevScore)=>{
-                return(preScore+1)
+                return(prevScore+1)
             })
         }else {
             setResult('졌습니다!');
