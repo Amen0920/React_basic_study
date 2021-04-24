@@ -2,7 +2,7 @@ import React , { Component } from 'react'
 import Ball from './Ball';
 
 function getWinNumbers(){
-    console.log('getWinnumbers');
+    console.log('getNumbers');
     const candidate = Array(45).fill().map((v,i)=> i +1);
     const suffle = [];
     while(candidate.length > 0){
