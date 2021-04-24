@@ -3,7 +3,9 @@ import Td from './Td';
 
 const Tr = () =>{
     return (
-        <Td>{''}</Td>
+        <tr>
+            <Td>{''}</Td>
+        </tr>
     )
 }
 

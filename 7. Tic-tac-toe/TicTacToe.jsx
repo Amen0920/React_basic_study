@@ -5,7 +5,7 @@ const initialState = {
     winner:'',
     turn: 'O',
     tableData:[['','',''],['','',''],['','','']],
-}
+};
 
 const reducer = (state, action) => {
     switch( action.type ){
@@ -16,8 +16,7 @@ const reducer = (state, action) => {
                 winner: action.winner
             };
     }
-}
-
+};
 const TicTacToe = () => {
     const [state,dispatch] = useReducer(reducer,initialState);
 
