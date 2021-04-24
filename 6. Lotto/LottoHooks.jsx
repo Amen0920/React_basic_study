@@ -1,4 +1,4 @@
-import React ,{ useRef, useState, useEffect, useMemo } from 'react';
+import React ,{ useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import Ball from './Ball';
 
 function getWinNumbers(){
@@ -22,6 +22,16 @@ const Lotto = () =>{
     const [redo, setRedo] = useState(false);
     const timeouts = useRef([]);
 
+    // const mounted = useRef(false);
+    // useEffect(()=>{
+    //     if(!mounted.current){
+    //         mounted.current=true;
+    //     }else{
+
+    //     }
+    // },[바뀌는값]); 
+    // componetDidUpdate 때만 실행시키고싶을때.
+
     useEffect(()=>{
         for(let i =0 ; i< winNumbers.length-1; i++){
             timeouts.current[i] = setTimeout(()=>{
@@ -41,13 +51,15 @@ const Lotto = () =>{
     },[timeouts.current]); // 두번째 인수인 배열 [] 이 빈 배열이면 compoentDidMount와 동일역할을함
            // 배열의 요소가 있으면 componetDidMount, componetDidUpdate 둘 다의 역할을함
 
-    const onClickRedo = ()=>{
+    const onClickRedo = useCallback(()=>{
+        console.log('onclickRedo');
+        console.log(winNumbers);
         setWinNumbers(getWinNumbers());
         setWinBalls([]);
         setBonus(null);
         setRedo(false);
         timeouts.current = [];
-    }
+    },[winNumbers]);
 
     return(
         <>
