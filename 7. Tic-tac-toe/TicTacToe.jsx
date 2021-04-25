@@ -42,7 +42,6 @@ const reducer = (state, action) => {
                 ...state,
                 tableData:[['','',''],['','',''],['','','']],
                 recentCell:[-1,-1],
-                winner:''
             }
         }
         default:
