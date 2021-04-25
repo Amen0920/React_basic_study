@@ -1,12 +1,12 @@
 import React from 'react';
 import Tr from './Tr';
 
-const Table = ({onClick}) =>{
+const Table = ({ onClick, tableData }) => {
     return (
         <table onClick={onClick}>
-            <Tr>{''}</Tr>
+            {Array(tableData.length).fill().map((v,i) => (<Tr rowData={tableData[i]}/>))}
         </table>
     )
-}
+};
 
 export default Table;

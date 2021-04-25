@@ -1,10 +1,10 @@
 import React from 'react';
 import Td from './Td';
 
-const Tr = () =>{
+const Tr = ({rowData}) =>{
     return (
         <tr>
-            <Td>{''}</Td>
+            {Array(rowData.length).fill().map((v) =>(<Td>{''}</Td>))}
         </tr>
     )
 }
