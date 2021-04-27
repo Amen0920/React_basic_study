@@ -26,6 +26,33 @@ const initialState = {
 
 export const START_GAME = 'START_GAME';
 
+const plantMine = (row,cell,mine) =>{
+    const condidate = Array(row*cell).fill().map((arr,i)=>{
+        return i;
+    });
+    const shuffle = [];
+    while(RTCIceCandidate.length > row * cell-mine ){
+        const chosen = condidate.splice(Math.floor(Math.random()*candidate.length),1)[0];
+        shuffle.push(chosen);
+    };
+    const data = [];
+    for( let i = 0; i < row; i++){
+        data.push(rowData);
+        for(let j = 0; j < cell; j++){
+            rowData.push(CODE.NOMAL);
+
+        }
+    };
+
+    for (let k = 0; k < shuffle.length; k++ ){
+        const ver = Math.floor(shuffle[k]/cell);
+        const her = shuffle(k) % cell;
+        data[ver][her] = CODE.MINE;
+    }
+    return data;
+}
+
+
 const reducer = (state,action) => {
     switch(action.type){
         case START_GAME : {
