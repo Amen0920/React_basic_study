@@ -4,7 +4,7 @@ const RefreshWebpack = require('@pmmmwh/react-refresh-webpack-plugin')
 module.exports = {
     name : 'Minesweeper-setting',
     mode : 'development',
-    devtool : 'eval',
+    devtool : 'inline-source-map',
     resolve :{
         extensions:['.js','.jsx']
     },

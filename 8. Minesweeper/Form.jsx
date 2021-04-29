@@ -1,5 +1,5 @@
 import React,{useCallback, useState, useContext} from 'react';
-import { TableContext,START_GAME } from './Minesweeper';
+import { TableContext, START_GAME } from './Minesweeper';
 
 
 const Form = () => {
@@ -7,7 +7,8 @@ const Form = () => {
     const [cell, setCell] = useState(10);
     const [mine, setMine] = useState(20);
 
-    const { dispatch } = useContext(TableContext);
+    const value = useContext( TableContext );
+    const { dispatch } = value;
 
     const onChangeRow = useCallback((e) => {
         setRow(e.target.value);
