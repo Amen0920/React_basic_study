@@ -27,12 +27,12 @@ const initialState = {
 export const START_GAME = 'START_GAME';
 
 const plantMine = (row,cell,mine) =>{
-    const condidate = Array(row*cell).fill().map((arr,i)=>{
+    const candidate = Array(row*cell).fill().map((arr,i)=>{
         return i;
     });
     const shuffle = [];
-    while(RTCIceCandidate.length > row * cell-mine ){
-        const chosen = condidate.splice(Math.floor(Math.random()*candidate.length),1)[0];
+    while(candidate.length > row * cell-mine ){
+        const chosen = candidate.splice(Math.floor(Math.random()*candidate.length),1)[0];
         shuffle.push(chosen);
     };
     const data = [];
