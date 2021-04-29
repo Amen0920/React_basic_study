@@ -17,8 +17,11 @@ module.exports = {
         rules:[{
             test:/\.jsx?/,
             loader:'babel-loader',
-            presets:['@babel/preset-env','@babel/preset-react'],
-            plugins:['react-refresh/babel'],
+            options:{
+                presets:['@babel/preset-env','@babel/preset-react'],
+                plugins:['react-refresh/babel'],
+            }
+            
 
         }]
     },
@@ -34,8 +37,8 @@ module.exports = {
     },
 
     devServer:{
-        host:true,
         port:8081,
+        hot:true,
         publicPath:'/js/'
     }
 

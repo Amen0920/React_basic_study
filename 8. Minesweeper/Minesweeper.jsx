@@ -31,12 +31,13 @@ const plantMine = (row,cell,mine) =>{
         return i;
     });
     const shuffle = [];
-    while(candidate.length > row * cell-mine ){
+    while(candidate.length > row * cell - mine ){
         const chosen = candidate.splice(Math.floor(Math.random()*candidate.length),1)[0];
         shuffle.push(chosen);
     };
     const data = [];
     for( let i = 0; i < row; i++){
+        const rowData = [];
         data.push(rowData);
         for(let j = 0; j < cell; j++){
             rowData.push(CODE.NOMAL);
@@ -49,6 +50,7 @@ const plantMine = (row,cell,mine) =>{
         const her = shuffle(k) % cell;
         data[ver][her] = CODE.MINE;
     }
+    console.log('data:'+data);
     return data;
 }
 
