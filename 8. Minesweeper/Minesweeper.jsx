@@ -73,8 +73,55 @@ const reducer = (state,action) => {
         };
         case OPEN_CELL :{
             const tableData = [...state.tableData];
-            tableData[action.row] = [...state.tableData[action.row]];
-            tableData[action.row][action.cell] = CODE.OPENED;
+            // tableData[action.row] = [...state.tableData[action.row]];
+            tableData.forEach( (row,i) => {
+                tableData[i] = [...state.tableData[i]];
+            });
+
+            const checkAround = (row,cell)=>{
+                let around = [];
+                if(tableData[row -1]){
+                    around = around.concat(
+                        tableData[row-1][cell-1],
+                        tableData[row-1][cell],
+                        tableData[row-1][cell+1]
+                    );
+                };
+                around = around.concat(
+                    tableData[row][cell-1],
+                    tableData[row][cell+1],
+                )
+                if(tableData[row+1]){
+                    around = around.concat(
+                        tableData[row+1][cell-1],
+                        tableData[row+1][cell],
+                        tableData[row+1][cell+1]
+                    );
+            
+                }
+                const count = around.filter((v) => [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v)).length;
+                tableData[row][cell] = count;
+
+                if(count === 0 ){
+                    const near = [];
+                    if (row -1 > -1){
+                        near.push([[row-1,cell-1]]);
+                        near.push([[row-1,cell]]);
+                        near.push([[row-1,cell+1]]);
+                    }
+                    near.push([[row,cell-1]]);
+                    near.push([[row,cell+1]]);
+                    if (row + 1 <= tableData.length ){
+                        near.push([[row+1,cell-1]]);
+                        near.push([[row+1,cell]]);
+                        near.push([[row+1,cell+1]]);
+                    }
+                    near.filter((v  => !!v)).forEach( (n) => {
+                        checkAround(n[[0],n[1]])
+                    })
+                }
+            }
+            checkAround(action.row, action.cell);
             return{
                 ...state,
                 tableData,
