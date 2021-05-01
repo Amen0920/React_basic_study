@@ -77,8 +77,21 @@ const reducer = (state,action) => {
             tableData.forEach( (row,i) => {
                 tableData[i] = [...state.tableData[i]];
             });
+            const checked = []; 
 
             const checkAround = (row,cell)=>{
+                if([CODE.OPENED, CODE.FLAG_MINE, CODE.FLAG, CODE.QUESTION_MINE,CODE.QUESTION].includes()){
+                    return;
+                }
+                if(row < 0 || row > tableData.length || cell < 0 || cell > tableData[0].length ){
+                    return;
+                } 
+                if(checked.includes(row + ',' + cell)){ // 이미검사한 칸.
+                    return; 
+                }else{
+                    checked.push(row +','+cell);
+                }
+
                 let around = [];
                 if(tableData[row -1]){
                     around = around.concat(
@@ -101,7 +114,6 @@ const reducer = (state,action) => {
                 }
                 const count = around.filter((v) => [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v)).length;
                 tableData[row][cell] = count;
-
                 if(count === 0 ){
                     const near = [];
                     if (row -1 > -1){
@@ -116,8 +128,10 @@ const reducer = (state,action) => {
                         near.push([[row+1,cell]]);
                         near.push([[row+1,cell+1]]);
                     }
-                    near.filter((v  => !!v)).forEach( (n) => {
-                        checkAround(n[[0],n[1]])
+                    near.forEach( (n) => {
+                        if(tableData[n[0][n[1] !== CODE.OPENED]]){
+                            checkAround(n[[0],n[1]]);
+                        }  
                     })
                 }
             }
