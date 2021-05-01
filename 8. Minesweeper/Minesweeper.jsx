@@ -22,8 +22,14 @@ export const TableContext = createContext({
 const initialState = {
     tableData:[],
     timer:0,
+    data:{
+        row:0,
+        cell:0,
+        mine:0
+    },
     result:'',
-    halted:true
+    halted:true,
+    openedCount: 0
 };
 
 export const START_GAME = 'START_GAME';
@@ -67,29 +73,41 @@ const reducer = (state,action) => {
         case START_GAME : {
             return{
                 ...state,
+                data:{
+                    row:action.row,
+                    cell:action.cell,
+                    mine:action.mine      
+                },
                 tableData:plantMine(action.row,action.cell,action.mine),
-                halted:false
+                halted:false,
+                openedCount:0
             }
         };
         case OPEN_CELL :{
             const tableData = [...state.tableData];
             // tableData[action.row] = [...state.tableData[action.row]];
-            tableData.forEach( (row,i) => {
-                tableData[i] = [...state.tableData[i]];
+            tableData.forEach((row,i) => {
+                tableData[i] = [...row];
             });
             const checked = []; 
-
+            let cellcount = 0;
             const checkAround = (row,cell)=>{
-                if([CODE.OPENED, CODE.FLAG_MINE, CODE.FLAG, CODE.QUESTION_MINE,CODE.QUESTION].includes()){
-                    return;
-                }
-                if(row < 0 || row > tableData.length || cell < 0 || cell > tableData[0].length ){
+                console.log('row:'+row, 'cell:'+cell)
+                if(row < 0 || row >= tableData.length || cell < 0 || cell >= tableData[0].length ){
+                    
                     return;
                 } 
-                if(checked.includes(row + ',' + cell)){ // 이미검사한 칸.
+                if([CODE.OPENED, CODE.FLAG_MINE, CODE.FLAG, CODE.QUESTION_MINE, CODE.QUESTION].includes(tableData[row][cell])){
+                    return;
+                }
+                if(tableData[row][cell]>0){
+                    return;
+                }
+                if(checked.includes(row + '/' + cell)){ // 이미검사한 칸.
                     return; 
                 }else{
-                    checked.push(row +','+cell);
+                    cellcount++;
+                    checked.push(row + '/' + cell); 
                 }
 
                 let around = [];
@@ -115,30 +133,50 @@ const reducer = (state,action) => {
                 const count = around.filter((v) => [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v)).length;
                 tableData[row][cell] = count;
                 if(count === 0 ){
+                    
                     const near = [];
                     if (row -1 > -1){
-                        near.push([[row-1,cell-1]]);
-                        near.push([[row-1,cell]]);
-                        near.push([[row-1,cell+1]]);
+                        
+                        near.push([row-1,cell-1]);
+                        near.push([row-1,cell]);
+                        near.push([row-1,cell+1]);
                     }
-                    near.push([[row,cell-1]]);
-                    near.push([[row,cell+1]]);
-                    if (row + 1 <= tableData.length ){
-                        near.push([[row+1,cell-1]]);
-                        near.push([[row+1,cell]]);
-                        near.push([[row+1,cell+1]]);
+                   
+                    near.push([row,cell-1]);
+                    near.push([row,cell+1]);
+                    if (row + 1 < tableData.length ){
+                       
+                        near.push([row+1,cell-1]);
+                        near.push([row+1,cell]);
+                        near.push([row+1,cell+1]);
                     }
-                    near.forEach( (n) => {
-                        if(tableData[n[0][n[1] !== CODE.OPENED]]){
-                            checkAround(n[[0],n[1]]);
+                   
+                    near.filter(v => !!v).forEach((n) => {
+                        
+                        if(tableData[n[0]][n[1]] !== CODE.OPENED){
+    
+                            checkAround(n[0],n[1]);
                         }  
                     })
                 }
             }
+          
             checkAround(action.row, action.cell);
+            let halted = false;
+            let result = '';
+            if(state.data.row * state.data.cell - state.data.mine === state.openedCount + cellcount){ //승리
+                console.log('111')
+                console.log('행*열-지:'+(state.data.row * state.data.cell - state.data.mine));
+                console.log('openedCount++:'+(state.openedCount + cellcount));
+                halted = true;
+                result ='승리하셨습니다.'
+            }
             return{
                 ...state,
                 tableData,
+                openedCount: state.openedCount + cellcount,
+                halted,
+                result
             }
         };
         case CLICK_MINE :{
