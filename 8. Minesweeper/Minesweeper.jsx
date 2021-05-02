@@ -1,4 +1,4 @@
-import React, {useReducer, createContext, useMemo} from 'react';
+import React, {useReducer, createContext, useMemo, useEffect} from 'react';
 import Table from './Table';
 import Form from './Form'
 
@@ -38,6 +38,7 @@ export const CLICK_MINE = 'CLICK_MINE';
 export const FLAG_CELL = 'FLAG_CELL';
 export const QUESTION_CELL = 'QUESTION_CELL';
 export const NOMALIZE_CELL = 'NOMALIZE_CELL';
+export const INCREMENT_TIMER = 'INCREMENT_TIMER';
 
 const plantMine = (row,cell,mine) =>{
     const candidate = Array(row*cell).fill().map((arr,i)=>{
@@ -80,7 +81,8 @@ const reducer = (state,action) => {
                 },
                 tableData:plantMine(action.row,action.cell,action.mine),
                 halted:false,
-                openedCount:0
+                openedCount:0,
+                timer:0
             }
         };
         case OPEN_CELL :{
@@ -169,7 +171,7 @@ const reducer = (state,action) => {
                 console.log('행*열-지:'+(state.data.row * state.data.cell - state.data.mine));
                 console.log('openedCount++:'+(state.openedCount + cellcount));
                 halted = true;
-                result ='승리하셨습니다.'
+                result =`${state.timer}초 만에 승리하셨습니다.`
             }
             return{
                 ...state,
@@ -230,7 +232,13 @@ const reducer = (state,action) => {
                 ...state,
                 tableData,
             }
-        }
+        };
+        case INCREMENT_TIMER :{
+            return{
+                ...state,
+                timer: state.timer+1,
+            }
+        };
         
         default:
             return state;
@@ -241,6 +249,20 @@ const Minesweeper = () => {
     const [state,dispatch] = useReducer(reducer,initialState);
     const { tableData, halted, timer, result } = state;
     const value = useMemo(()=>({ tableData: tableData, dispatch, halted:halted}),[tableData])
+
+    useEffect(() => {
+        let timerC;
+        if(halted === false){
+            timerC = setTimeout(() => {
+                console.log('timer!')
+                dispatch({type:INCREMENT_TIMER})
+            },1000);
+        }
+        return ()=> {
+            clearInterval(timerC);
+        }
+    },[halted,timer])
+
     return(
         <TableContext.Provider value={value}>
             <Form />

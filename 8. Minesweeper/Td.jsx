@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useCallback, useContext, memo, useMemo } from 'react'
 import { CODE, OPEN_CELL, TableContext, CLICK_MINE, FLAG_CELL, QUESTION_CELL,NOMALIZE_CELL } from './Minesweeper';
 
 
@@ -37,6 +37,7 @@ const getTdStyle = (code) => {
 };
 
 const getTdText = (code) => {
+    console.log('td text')
     switch (code) {
         case CODE.NOMAL:{
             return '';
@@ -59,14 +60,12 @@ const getTdText = (code) => {
         }
 
     }
-}
+};
 
 
-const Td =({rowIndex, cellIndex}) => {
+const Td =memo(({rowIndex, cellIndex}) => {
 
     const { tableData,dispatch, halted } = useContext(TableContext);
-
-
     const onClickTd = useCallback(() =>{
         if(halted)return;
         switch (tableData[rowIndex][cellIndex]){
@@ -116,18 +115,31 @@ const Td =({rowIndex, cellIndex}) => {
         }
 
     },[tableData[rowIndex][cellIndex],halted]);
+    console.log('td rendered')
 
-    return(
+    return (
+       
+        <RealTd data = {tableData[rowIndex][cellIndex]} onClickTd={onClickTd} 
+                onRightClickTd={onRightClickTd}/>
+    )
+      
+   
+
+});
+
+const RealTd = memo(({data, onClickTd, onRightClickTd }) => {
+    console.log('realTd')
+    return (
         <>
             <td
-                style={getTdStyle(tableData[rowIndex][cellIndex])}
+                style={getTdStyle(data)}
                 onClick={onClickTd} onContextMenu={onRightClickTd}
                 >
-                {getTdText(tableData[rowIndex][cellIndex])}
+                {getTdText(data)}
             </td>
-        </>
+         </>
     )
+})
 
-}
 
 export default Td;
